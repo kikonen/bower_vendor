@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["kari"]
   spec.email         = ["mr.kari.ikonen@gmail.com"]
   spec.summary       = 'Use bower to manage resources for rails application'
-  spec.description   = ''
-  spec.homepage      = ""
+  spec.description   = 'Manage vendor assets using simple configuration file'
+  spec.homepage      = "https://github.com/kikonen/bower_vendor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

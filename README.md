@@ -3,22 +3,29 @@
 Rake tasks to manage vendor assets for rails application
 using bower. This gem is inspired by bower-rails.
 
-## Installation
+# Install
 
-Add this line to your application's Gemfile:
-
+Gemfile
 ```ruby
 gem 'bower_vendor'
 ```
 
-And then execute:
+# Usage
 
-    $ bundle
+1) Configuration file
 
-Or install it yourself as:
+vendor.yml
+```ruby
+angular:
+  version: 1.3.15
+  files:
+  - angular.js
+```
 
-    $ gem install bower_vendor
+2) Install assets
 
-## Usage
+```bash
+bundle exec rake vendor:all
+```
 
-TODO: Write usage instructions here
+Assets will be copied into vendor/assets
