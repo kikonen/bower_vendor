@@ -1,8 +1,7 @@
 module BowerVendor
-module BowerVendor
   class Railtie < Rails::Railtie
     rake_tasks do
-      load
+      BowerVendor.load_tasks
     end
   end
 end
