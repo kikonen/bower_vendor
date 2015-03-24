@@ -20,6 +20,7 @@ angular:
   version: 1.3.15
   files:
   - angular.js
+  - angular-csp.css
 ```
 
 2) Install assets
@@ -29,3 +30,11 @@ bundle exec rake vendor:all
 ```
 
 Assets will be copied into vendor/assets
+
+
+# TODO
+
+- Support other more asset types
+  * curently only js and css are supported
+  * should support also fonts, etc.
+- Support more complex paths for assets
