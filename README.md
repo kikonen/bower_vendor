@@ -1,13 +1,14 @@
-# Bower::Vendor
+# BowerVendor
 
-TODO: Write a gem description
+Rake tasks to manage vendor assets for rails application
+using bower. This gem is inspired by bower-rails.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bower-vendor'
+gem 'bower_vendor'
 ```
 
 And then execute:
@@ -16,16 +17,8 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install bower-vendor
+    $ gem install bower_vendor
 
 ## Usage
 
 TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/bower-vendor/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
