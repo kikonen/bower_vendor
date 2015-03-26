@@ -32,16 +32,44 @@ gem 'bower_vendor'
 
 vendor.yml
 ```ruby
+jquery:
+  version: 2.1.3
+  assets:
+  - dist/jquery.js
+jquery-ujs:
+  version: 1.0.3
+  assets:
+  - src/rails.js
+lodash:
+  version: 3.0.0
+  assets:
+  - lodash.js
 angular:
   version: 1.3.15
-  files:
+  assets:
   - angular.js
-  - angular-csp.css
+bootstrap-sass:
+  version: 3.3.4
+  assets:
+  - assets/javascripts/bootstrap-sprockets.js
+  # copy into "bootstrap" subdir in destination
+  - bootstrap:
+    - assets/javascripts/*.js
+  - assets/stylesheets/_bootstrap.scss
+  - assets/stylesheets/_bootstrap-sprockets.scss
+  - bootstrap:
+    - assets/stylesheets/bootstrap/*.scss
+      # copy into "bootstrap/mixins" subdir in destination
+    - mixins:
+      - assets/stylesheets/bootstrap/mixins/*.scss
+  # "*" matches all files
+  - assets/fonts/bootstrap/*
 ```
 
 2) Install assets
 
 ```bash
+bundle exec rake vendor:clean
 bundle exec rake vendor:all
 ```
 

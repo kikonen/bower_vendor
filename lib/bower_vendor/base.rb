@@ -8,14 +8,16 @@ module BowerVendor
     end
 
     def config
-#      @config ||= YAML.load_file('vendor_config.yml')
-      @config ||= {
-        base_dir: 'vendor/assets',
-        dst_dirs: {
-          'css' => 'stylesheets',
-          'js' => 'javascripts',
-        }
-      }
+      @config ||= load_config('config/bower_vendor.yml')
+      @config ||= load_config(File.join(BowerVendor.root_dir, 'config/bower_vendor.yml'))
+    end
+
+    def load_config(file)
+      if File.exist?(file)
+        YAML.load_file(file)
+      else
+        nil
+      end
     end
 
     def base_src_dir

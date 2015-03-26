@@ -1,5 +1,5 @@
 namespace :vendor do
-  desc 'Do all'
+  desc 'Do everything except clean'
   task :all => [:setup, :fetch, :copy] do
   end
 

@@ -4,6 +4,7 @@ require 'json'
 
 require "bower_vendor/version"
 require "bower_vendor/base"
+require "bower_vendor/clean"
 require "bower_vendor/copy"
 require "bower_vendor/fetch"
 require "bower_vendor/setup"
@@ -19,6 +20,6 @@ module BowerVendor
 
   def self.load_tasks
     dir = File.join(root_dir, 'lib/tasks')
-    load "#{dir}/vendor.rake"
+    load "#{dir}/bower_vendor.rake"
   end
 end
