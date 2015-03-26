@@ -47,7 +47,9 @@ module BowerVendor
           base_src_dir = "#{work_dir}/bower_components"
           src = "#{base_src_dir}/#{asset_key}/#{src_path}"
 
-          Dir[src].sort!.each do |src_path|
+          files = Dir[src].sort!
+          raise "NOT_FOUND: #{src}" if files.empty?
+          files.each do |src_path|
             copy_src_file asset_key, asset_data, asset, src_path, target_path, level + 1
           end
         end
