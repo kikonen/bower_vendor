@@ -75,10 +75,30 @@ bundle exec rake vendor:all
 
 Assets will be copied into vendor/assets
 
+3) Using in application
+
+Instructions for bootstrap-sass are shown in https://github.com/twbs/bootstrap-sass
+
+app/assets/stylesheets/import_bootstrap.scss
+````css
+$icon-font-path: "bootstrap-sass-3.3.4/";
+@import "bootstrap-sass-3.3.4/bootstrap-sprockets";
+@import "bootstrap-sass-3.3.4/bootstrap";
+```
+
+app/assets/javascripts/application.js
+````javascript
+//
+//= require jquery-2.1.3/jquery
+//= require jquery-ujs-1.0.3/rails
+//= require lodash-3.0.0/lodash
+//= require bootstrap-sass-3.3.4/bootstrap-sprockets
+//
+//= require angular-1.3.15/angular
+//
+```
 
 # TODO
 
-- Support other more asset types
-  * curently only js and css are supported
-  * should support also fonts, etc.
-- Support more complex paths for assets
+- Improve documentation
+- Fix SVG image vs. font issue
