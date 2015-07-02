@@ -41,6 +41,8 @@ module BowerVendor
         else
           msg level, asset
 
+          raise "VERSION MISSING: #{asset_data.inspect}" unless asset_data['version']
+
           version = asset_data['version']
           src_path = asset.gsub("{{VERSION}}", version)
 

@@ -2,18 +2,22 @@
 base_dir: vendor/assets
 dst_dirs:
   # javascripts
+  coffee: javascripts
   js: javascripts
   es6: javascripts
   next: javascripts
   # stylesheets
   css: stylesheets
+  sass: stylesheets
   scss: stylesheets
+  less: stylesheets
   # fonts
   eot: fonts
   ttf: fonts
   woff: fonts
   woff2: fonts
   # images
+  gif: images
   jpg: images
   jpeg: images
   png: images

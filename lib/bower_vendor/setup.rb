@@ -14,8 +14,10 @@ module BowerVendor
         },
       }
       vendors.each do |vendor_key, vendor|
-        data[:dependencies][vendor_key] = vendor['version']
-        data[:resolutions][vendor_key] = vendor['version']
+        version = vendor['version']
+
+        data[:dependencies][vendor_key] = version
+        data[:resolutions][vendor_key] = version
       end
       File.write("#{work_dir}/bower.json", JSON.pretty_generate(data))
     end

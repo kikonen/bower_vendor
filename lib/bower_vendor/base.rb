@@ -5,6 +5,16 @@ module BowerVendor
 
     def vendors
       @vendors ||= YAML.load_file('vendor.yml')
+      validate_vendors
+      @vendors
+    end
+
+    def validate_vendors
+      # validate resources
+      @vendors.each do |vendor_key, vendor|
+        raise "VERSION MISSING: #{vendor.inspect}" unless vendor['version']
+        raise "ASSETS MISSING: #{vendor.inspect}" unless vendor['assets']
+      end
     end
 
     def config
