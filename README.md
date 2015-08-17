@@ -98,6 +98,13 @@ app/assets/javascripts/application.js
 //
 ```
 
+4) Check for asset updates
+
+```bash
+bundle exec rake vendor:check
+```
+
+
 # TODO
 
 - Improve documentation
