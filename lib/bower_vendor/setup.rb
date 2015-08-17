@@ -19,14 +19,20 @@ module BowerVendor
         data[:dependencies][vendor_key] = version
         data[:resolutions][vendor_key] = version
       end
-      File.write("#{work_dir}/bower.json", JSON.pretty_generate(data))
+
+      target_file = "#{work_dir}/bower.json"
+      File.write(target_file, JSON.pretty_generate(data))
+      puts "Wrote: #{target_file}"
     end
 
     def create_bowerrc
       data = {
         directory: "bower_components"
       }
-      File.write("#{work_dir}/.bowerrc", JSON.pretty_generate(data))
+
+      target_file = "#{work_dir}/.bowerrc"
+      File.write(target_file, JSON.pretty_generate(data))
+      puts "Wrote: #{target_file}"
     end
   end
 end

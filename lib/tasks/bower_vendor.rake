@@ -13,8 +13,13 @@ namespace :vendor do
     BowerVendor::Setup.new.execute
   end
 
+  desc 'Check for asset updates for bower_components (requires bower-check-updates)'
+  task :check => [:setup] do
+    BowerVendor::Check.new.execute
+  end
+
   desc 'Fetch bower_components'
-  task :fetch do
+  task :fetch => [:setup] do
     BowerVendor::Fetch.new.execute
   end
 
