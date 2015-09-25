@@ -15,9 +15,16 @@ module BowerVendor
       }
       vendors.each do |vendor_key, vendor|
         version = vendor['version']
+        tag_version = version
 
-        data[:dependencies][vendor_key] = version
-        data[:resolutions][vendor_key] = version
+        git = vendor['git']
+        tag = vendor['tag']
+        if git
+          tag_version = tag ? "#{git}##{tag}" : git
+        end
+
+        data[:dependencies][vendor_key] = tag_version
+        data[:resolutions][vendor_key] = tag_version
       end
 
       target_file = "#{work_dir}/bower.json"

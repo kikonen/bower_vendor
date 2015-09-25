@@ -30,6 +30,21 @@ gem 'bower_vendor'
 
 1) Configuration file
 
+Syntax
+```ruby
+# git & tag for the cases when bower central repo doesn't
+# have some package registered
+bootstrap-multiselect:
+  version: X.Y.Z
+#  git: git@github.com:gituser/repo-path.git
+#  tag: <git-tag>
+  assets:
+  - <asset-pattern>
+  - <asset-path>:
+    - <asset pattern>
+```ruby
+
+
 vendor.yml
 ```ruby
 jquery:
@@ -64,6 +79,14 @@ bootstrap-sass:
       - assets/stylesheets/bootstrap/mixins/*.scss
   # "*" matches all files
   - assets/fonts/bootstrap/*
+bootstrap-multiselect:
+  version: 0.9.13
+  git: git@github.com:davidstutz/bootstrap-multiselect.git
+  tag: v0.9.13
+  assets:
+  - dist/css/bootstrap-multiselect.css
+  - dist/js/bootstrap-multiselect.js
+  - dist/js/bootstrap-multiselect-collapsible-groups.js
 ```
 
 2) Install assets
