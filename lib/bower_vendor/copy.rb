@@ -1,8 +1,6 @@
 module BowerVendor
   class Copy < Base
     def execute
-      ap vendors
-
       vendors.each do |asset_key, asset_data|
         src_dir = "#{base_src_dir}/#{asset_key}"
         msg 0, "processing: #{src_dir}"
