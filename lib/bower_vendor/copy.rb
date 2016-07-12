@@ -39,9 +39,9 @@ module BowerVendor
         else
           msg level, asset
 
-          raise "VERSION MISSING: #{asset_data.inspect}" unless asset_data['version']
+          version = asset_data['version'].to_s
+          raise "VERSION MISSING: #{asset_data.inspect}" if version.blank?
 
-          version = asset_data['version']
           src_path = asset.gsub("{{VERSION}}", version)
 
           base_src_dir = "#{work_dir}/bower_components"
@@ -61,7 +61,7 @@ module BowerVendor
         raise "NOT_FOUND: #{full_src_file}"
       end
 
-      version = asset_data['version']
+      version = asset_data['version'].to_s
       src_file = full_src_file.split('/').last
       ext = src_file.split('.').last
       dst_file = src_file
