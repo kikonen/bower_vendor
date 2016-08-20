@@ -41,5 +41,9 @@ module BowerVendor
         'tmp'
       end
     end
+
+    def local_node_bin
+      "#{Rails.root}/node_modules/.bin"
+    end
   end
 end
