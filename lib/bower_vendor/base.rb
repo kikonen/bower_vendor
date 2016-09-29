@@ -4,7 +4,7 @@ module BowerVendor
     end
 
     def vendors
-      @vendors ||= YAML.load_file('vendor.yml')
+      @vendors ||= load_vendors
       validate_vendors
       @vendors
     end
@@ -44,6 +44,13 @@ module BowerVendor
 
     def local_node_bin
       "#{Rails.root}/node_modules/.bin"
+    end
+
+    def load_vendors
+      vendors = YAML.load_file('vendor.yml')
+      vendors.sort do |a, b|
+        a[0] <=> b[0]
+      end.to_h
     end
   end
 end
