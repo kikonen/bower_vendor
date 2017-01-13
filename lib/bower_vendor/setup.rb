@@ -24,7 +24,7 @@ module BowerVendor
         end
 
         data[:dependencies][vendor_key] = tag_version
-        data[:resolutions][vendor_key] = tag_version
+        data[:resolutions][vendor_key] = version
       end
 
       target_file = "#{work_dir}/bower.json"

@@ -12,16 +12,16 @@ module BowerVendor
 
     def run_scripts(asset_key, asset_data, level)
       scripts = (asset_data['build'] || [])
-      if !scripts.empty?
-        msg level, "building..."
-        scripts.each do |cmd|
-          full_cmd ="cd #{src_dir} && #{cmd}"
-          msg level + 1, full_cmd
-          pid = fork do
-            exec full_cmd
-          end
-          Process.wait pid
+      return if scripts.empty?
+
+      msg level, "building..."
+      scripts.each do |cmd|
+        full_cmd ="cd #{src_dir} && #{cmd}"
+        msg level + 1, full_cmd
+        pid = fork do
+          exec full_cmd
         end
+        Process.wait pid
       end
     end
 
@@ -31,6 +31,11 @@ module BowerVendor
     end
 
     def copy_asset(asset_key, asset_data, assets, target_path = '', level)
+      assets ||= []
+      if assets.empty?
+        msg level, "WARN: ASSETS MISSING"
+      end
+
       assets.each do |asset|
         if asset.is_a? Hash
           sub_asset = asset.keys.first

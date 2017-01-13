@@ -12,8 +12,8 @@ module BowerVendor
     def validate_vendors
       # validate resources
       @vendors.each do |vendor_key, vendor|
-        raise "VERSION MISSING: #{vendor.inspect}" unless vendor['version']
-        raise "ASSETS MISSING: #{vendor.inspect}" unless vendor['assets']
+        raise "VERSION MISSING: #{vendor_key}: #{vendor.inspect}" unless vendor['version']
+        puts "WARN: ASSETS MISSING: #{vendor_key}: #{vendor.inspect}" unless vendor['assets']
       end
     end
 
