@@ -2,24 +2,27 @@ module BowerVendor
   class Copy < Base
     def execute
       vendors.each do |asset_key, asset_data|
-        src_dir = "#{base_src_dir}/#{asset_key}"
+        src_dir = full_asset_key_src_dir(asset_key)
         msg 0, "processing: #{src_dir}"
 
-        run_scripts(asset_key, asset_data, 1)
+        run_build_scripts(asset_key, asset_data, 1)
         copy_assets(asset_key, asset_data, 1)
       end
     end
 
-    def run_scripts(asset_key, asset_data, level)
+    def run_build_scripts(asset_key, asset_data, level)
       scripts = (asset_data['build'] || [])
       return if scripts.empty?
 
+      src_dir = full_asset_key_src_dir(asset_key)
+
       msg level, "building..."
       scripts.each do |cmd|
-        full_cmd ="cd #{src_dir} && #{cmd}"
-        msg level + 1, full_cmd
+        msg level + 1, "cd #{src_dir} && #{cmd}"
+
         pid = fork do
-          exec full_cmd
+          Dir.chdir src_dir
+          puts `#{cmd}`
         end
         Process.wait pid
       end
@@ -47,10 +50,8 @@ module BowerVendor
           version = asset_data['version'].to_s
           raise "VERSION MISSING: #{asset_data.inspect}" if version.blank?
 
-          src_path = asset.gsub("{{VERSION}}", version)
-
-          base_src_dir = "#{work_dir}/bower_components"
-          src = "#{base_src_dir}/#{asset_key}/#{src_path}"
+          asset_path = asset.gsub("{{VERSION}}", version)
+          src = "#{full_asset_key_src_dir(asset_key)}/#{asset_path}"
 
           files = Dir[src].sort!
           raise "NOT_FOUND: #{src}" if files.empty?
@@ -71,7 +72,7 @@ module BowerVendor
       ext = src_file.split('.').last
       dst_file = src_file
 
-      base_dst_dir = dst_dirs[ext]
+      base_dst_dir = self.dst_dirs[ext]
       raise "NOT_FOUND_EXT: #{ext}" unless base_dst_dir
 
       dst_dir = "#{base_dst_dir}/#{asset_key}-#{version}"

@@ -30,8 +30,8 @@ module BowerVendor
       end
     end
 
-    def base_src_dir
-      @base_src_dir ||= 'bower_components'
+    def full_asset_key_src_dir(asset_key)
+      "#{self.work_dir}/bower_components/#{asset_key}"
     end
 
     def work_dir
