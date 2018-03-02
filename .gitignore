@@ -14,6 +14,5 @@
 *.gem
 mkmf.log
 /vendor
-/vendor.yml
 node_modules
 package-lock.json
