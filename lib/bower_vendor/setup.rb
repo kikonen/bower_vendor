@@ -14,11 +14,11 @@ module BowerVendor
         },
       }
       vendors.each do |vendor_key, vendor|
-        version = vendor['version']
+        version = vendor['version']&.to_s
         tag_version = version
 
         git = vendor['git']
-        tag = vendor['tag']
+        tag = vendor['tag']&.to_s
         if git
           tag_version = tag ? "#{git}##{tag}" : git
         end
