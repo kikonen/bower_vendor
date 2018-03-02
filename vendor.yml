@@ -3,15 +3,21 @@ angular:
   assets:
   - angular.js
 
-test_git:
-  version: master
+test_1:
+  version: test1
   git: git@github.com:kikonen/bower_vendor.git
-  tag: master
+  tag: test1
   assets:
   - test/test1.js
 
-test_url:
-  url: https://raw.githubusercontent.com/kikonen/bower_vendor/master/test/test2.js
-  version: test
+test_2:
+  url: https://code.jquery.com/jquery-3.3.1.slim.min.js
+  version: test2
   assets:
-  - test2.js
+  - index.js
+
+test_3:
+  url: https://www.ikari.fi/images/kari.jpg
+  version: test3
+  assets:
+  - index.jpg
