@@ -1,0 +1,9 @@
+{
+  "description": "shut up node",
+  "repository": "shut up node",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bower": "^1.8.2",
+    "bower-check-updates": "^2.2.3-1"
+  }
+}

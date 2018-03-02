@@ -48,7 +48,7 @@ module BowerVendor
           msg level, asset
 
           version = asset_data['version'].to_s
-          raise "VERSION MISSING: #{asset_data.inspect}" if version.blank?
+          raise "VERSION MISSING: #{asset_data.inspect}" if version.empty?
 
           asset_path = asset.gsub("{{VERSION}}", version)
           src = "#{full_asset_key_src_dir(asset_key)}/#{asset_path}"

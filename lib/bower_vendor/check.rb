@@ -13,6 +13,7 @@ module BowerVendor
 
     def executable
       f = "#{local_node_bin}/bcu"
+      puts "BCU: #{f}"
       File.exists?(f) ? f : 'bcu'
     end
   end

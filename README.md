@@ -30,19 +30,26 @@ gem 'bower_vendor'
 
 1) Configuration file
 
-Syntax
+github Syntax
 ```ruby
 # git & tag for the cases when bower central repo doesn't
 # have some package registered
 bootstrap-multiselect:
   version: X.Y.Z
-#  git: git@github.com:gituser/repo-path.git
-#  tag: <git-tag>
+  git: git@github.com:gituser/repo-path.git
+  tag: <git-tag>
   assets:
   - <asset-pattern>
   - <asset-path>:
     - <asset pattern>
+```
+
+URL Syntax
 ```ruby
+bootstrap-multiselect:
+  version: X.Y.Z
+  url: https://some.host/some.js
+```
 
 
 vendor.yml

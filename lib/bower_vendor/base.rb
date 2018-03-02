@@ -35,15 +35,19 @@ module BowerVendor
     end
 
     def work_dir
-      if defined?(Rails)
-        "#{Rails.root}/tmp"
-      else
-        'tmp'
-      end
+      "#{self.root_dir}/tmp"
     end
 
     def local_node_bin
-      "#{Rails.root}/node_modules/.bin"
+      "#{self.root_dir}/node_modules/.bin"
+    end
+
+    def root_dir
+      @root_dir ||= if defined?(Rails)
+                      Rails.root
+                    else
+                      Dir.pwd
+                    end
     end
 
     def load_vendors

@@ -23,6 +23,11 @@ module BowerVendor
           tag_version = tag ? "#{git}##{tag}" : git
         end
 
+        url = vendor['url']
+        if url
+          tag_version = url
+        end
+
         data[:dependencies][vendor_key] = tag_version
         data[:resolutions][vendor_key] = version
       end
