@@ -1,7 +1,7 @@
 # BowerVendor
 
 Simple rake tasks to manage vendor assets for rails application
-using bower. This gem is inspired by bower-rails.
+using bower or yarn. This gem is inspired by bower-rails.
 
 Reason for the existence of this gem is to have improved assets control, which is lacking
 in bower-rails. This gem not only fetches assets using bower, but also contains logic to
@@ -94,6 +94,34 @@ bootstrap-multiselect:
   - dist/css/bootstrap-multiselect.css
   - dist/js/bootstrap-multiselect.js
   - dist/js/bootstrap-multiselect-collapsible-groups.js
+```
+
+vendor_yarn.yml
+```yaml
+bootstrap:
+  assets:
+    - scss/*.scss
+    - mixins:
+        - scss/mixins/*.scss
+    - utilities:
+        - scss/utilities/*.scss
+    - js/dist/*.js
+
+jquery:
+  assets:
+    - dist/jquery.js
+
+lodash:
+  assets:
+    - lodash.js
+
+url.js:
+  assets:
+    - url.js
+
+vue:
+  assets:
+    - dist/vue.js
 ```
 
 2) Install assets

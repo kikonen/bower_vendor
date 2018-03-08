@@ -7,6 +7,7 @@ require "bower_vendor/base"
 require "bower_vendor/clean"
 require "bower_vendor/check"
 require "bower_vendor/copy"
+require "bower_vendor/yarn"
 require "bower_vendor/fetch"
 require "bower_vendor/setup"
 

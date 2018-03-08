@@ -1,6 +1,6 @@
 namespace :vendor do
   desc 'Do everything except clean'
-  task :all => [:setup, :fetch, :copy] do
+  task :all => [:setup, :fetch, :copy, :yarn] do
   end
 
   desc 'Clear bower setup and fetched bower_components'
@@ -26,5 +26,10 @@ namespace :vendor do
   desc 'Copy bower_components to vendor/assets'
   task :copy do
     BowerVendor::Copy.new.execute
+  end
+
+  desc 'Copy yarn node_modules to vendor/assets'
+  task :yarn do
+    BowerVendor::Yarn.new.execute
   end
 end
