@@ -1,5 +1,7 @@
 class BowerVendor::Setup < BowerVendor::Base
   def execute
+    return if vendors.empty?
+
     create_bowerrc
     create_bower_json
   end

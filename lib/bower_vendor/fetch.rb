@@ -1,5 +1,7 @@
 class BowerVendor::Fetch < BowerVendor::Base
   def execute
+    return if vendors.empty?
+
     script = executable
     puts "excutable: #{script}"
 
