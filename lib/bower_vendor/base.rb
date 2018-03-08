@@ -3,14 +3,18 @@ class BowerVendor::Base
   end
 
   def vendors
-    @vendors ||= load_vendors
-    validate_vendors
+    @vendors ||= load_vendors.delete_if { |vendor, vendor_data| !accept_vendor?(vendor, vendor_data) }
+    validate_vendors(@vendors)
     @vendors
   end
 
-  def validate_vendors
+  def accept_vendor?(vendor, vendor_data)
+    !vendor_data['yarn']
+  end
+
+  def validate_vendors(vendors)
     # validate resources
-    @vendors.each do |vendor_key, vendor|
+    vendors.each do |vendor_key, vendor|
       raise "VERSION MISSING: #{vendor_key}: #{vendor.inspect}" unless vendor['version']
       puts "WARN: ASSETS MISSING: #{vendor_key}: #{vendor.inspect}" unless vendor['assets']
     end
@@ -29,8 +33,8 @@ class BowerVendor::Base
     end
   end
 
-  def full_asset_key_src_dir(asset_key)
-    "#{self.work_dir}/bower_components/#{asset_key}"
+  def full_vendor_src_dir(vendor)
+    "#{self.work_dir}/bower_components/#{vendor}"
   end
 
   def work_dir

@@ -1,24 +1,25 @@
 class BowerVendor::Yarn < BowerVendor::Copy
-  def full_asset_key_src_dir(asset_key)
-    "node_modules/#{asset_key}"
+  def full_vendor_src_dir(vendor)
+    "node_modules/#{vendor}"
   end
 
-  def validate_vendors
-    # nothing
+  def accept_vendor?(vendor, vendor_data)
+    vendor_data['yarn']
   end
 
   def load_vendors
     versions = load_vendor_versions
 
-    vendors = YAML.load_file 'vendor_yarn.yml'
+    vendors_data = YAML.load_file 'vendor.yml'
+    vendors_data.delete_if { |vendor, vendor_data| !accept_vendor?(vendor, vendor_data) }
 
-    vendors.each do |vendor, vendor_data|
+    vendors_data.each do |vendor, vendor_data|
       version = versions[vendor]
       raise "YARN: missing vendor: #{vendor}" unless version
       vendor_data['version'] = version
     end
 
-    vendors
+    vendors_data
   end
 
   def load_vendor_versions

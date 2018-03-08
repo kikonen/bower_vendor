@@ -21,3 +21,33 @@ test_3:
   version: test3
   assets:
   - index.jpg
+
+bootstrap:
+  yarn: true
+  assets:
+    - scss/*.scss
+    - mixins:
+        - scss/mixins/*.scss
+    - utilities:
+        - scss/utilities/*.scss
+    - js/dist/*.js
+
+jquery:
+  yarn: true
+  assets:
+    - dist/jquery.js
+
+lodash:
+  yarn: true
+  assets:
+    - lodash.js
+
+url.js:
+  yarn: true
+  assets:
+    - url.js
+
+vue:
+  yarn: true
+  assets:
+    - dist/vue.js

@@ -1,19 +1,19 @@
 class BowerVendor::Copy < BowerVendor::Base
   def execute
-    vendors.each do |asset_key, asset_data|
-      src_dir = full_asset_key_src_dir(asset_key)
+    vendors.each do |vendor, asset_data|
+      src_dir = full_vendor_src_dir(vendor)
       msg 0, "processing: #{src_dir}"
 
-      run_build_scripts(asset_key, asset_data, 1)
-      copy_assets(asset_key, asset_data, 1)
+      run_build_scripts(vendor, asset_data, 1)
+      copy_assets(vendor, asset_data, 1)
     end
   end
 
-  def run_build_scripts(asset_key, asset_data, level)
+  def run_build_scripts(vendor, asset_data, level)
     scripts = (asset_data['build'] || [])
     return if scripts.empty?
 
-    src_dir = full_asset_key_src_dir(asset_key)
+    src_dir = full_vendor_src_dir(vendor)
 
     msg level, "building..."
     scripts.each do |cmd|
@@ -27,12 +27,12 @@ class BowerVendor::Copy < BowerVendor::Base
     end
   end
 
-  def copy_assets(asset_key, asset_data, level)
-    msg level, "copying: #{asset_key}..."
-    copy_asset(asset_key, asset_data, asset_data['assets'], '', level + 1)
+  def copy_assets(vendor, asset_data, level)
+    msg level, "copying: #{vendor}..."
+    copy_asset(vendor, asset_data, asset_data['assets'], '', level + 1)
   end
 
-  def copy_asset(asset_key, asset_data, assets, target_path = '', level)
+  def copy_asset(vendor, asset_data, assets, target_path = '', level)
     assets ||= []
     if assets.empty?
       msg level, "WARN: ASSETS MISSING"
@@ -42,7 +42,7 @@ class BowerVendor::Copy < BowerVendor::Base
       if asset.is_a? Hash
         sub_asset = asset.keys.first
         sub_target_path = target_path.empty? ? sub_asset : target_path + '/' + sub_asset
-        copy_asset(asset_key, asset_data, asset[sub_asset], sub_target_path, level + 1)
+        copy_asset(vendor, asset_data, asset[sub_asset], sub_target_path, level + 1)
       else
         msg level, asset
 
@@ -50,18 +50,18 @@ class BowerVendor::Copy < BowerVendor::Base
         raise "VERSION MISSING: #{asset_data.inspect}" if version.empty?
 
         asset_path = asset.gsub("{{VERSION}}", version)
-        src = "#{full_asset_key_src_dir(asset_key)}/#{asset_path}"
+        src = "#{full_vendor_src_dir(vendor)}/#{asset_path}"
 
         files = Dir[src].sort!
         raise "NOT_FOUND: #{src}" if files.empty?
         files.each do |src_path|
-          copy_src_file asset_key, asset_data, asset, src_path, target_path, level + 1
+          copy_src_file vendor, asset_data, asset, src_path, target_path, level + 1
         end
       end
     end
   end
 
-  def copy_src_file(asset_key, asset_data, orig_path, full_src_file, target_path, level)
+  def copy_src_file(vendor, asset_data, orig_path, full_src_file, target_path, level)
     if !File.exist? full_src_file
       raise "NOT_FOUND: #{full_src_file}"
     end
@@ -74,7 +74,7 @@ class BowerVendor::Copy < BowerVendor::Base
     base_dst_dir = self.dst_dirs[ext]
     raise "NOT_FOUND_EXT: #{ext}" unless base_dst_dir
 
-    dst_dir = "#{base_dst_dir}/#{asset_key}-#{version}"
+    dst_dir = "#{base_dst_dir}/#{vendor}-#{version}"
     dst_dir = "#{dst_dir}/#{target_path}" unless target_path.empty?
     full_dst_file = "#{dst_dir}/#{dst_file}"
 
