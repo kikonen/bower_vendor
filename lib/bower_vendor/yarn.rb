@@ -38,7 +38,7 @@ class BowerVendor::Yarn < BowerVendor::Copy
       elsif line.start_with?(' ')
         next
       else
-        vendor = line.split('@').first
+        vendor = line.tr('"', '').split('@').first
       end
     end
 

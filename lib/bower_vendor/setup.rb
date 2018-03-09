@@ -43,6 +43,8 @@ class BowerVendor::Setup < BowerVendor::Base
       directory: "bower_components"
     }
 
+    FileUtils.mkdir_p(work_dir)
+
     target_file = "#{work_dir}/.bowerrc"
     File.write(target_file, JSON.pretty_generate(data))
     puts "Wrote: #{target_file}"
