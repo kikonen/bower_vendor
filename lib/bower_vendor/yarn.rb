@@ -31,6 +31,8 @@ class BowerVendor::Yarn < BowerVendor::Copy
     vendor = nil
     lines.each do |line|
       next if line.start_with?('#')
+      next if line.empty?
+
       if line.start_with?('  version')
         version = line.split(' ').last.tr('"', '')
         versions[vendor] = version
@@ -38,7 +40,9 @@ class BowerVendor::Yarn < BowerVendor::Copy
       elsif line.start_with?(' ')
         next
       else
-        vendor = line.tr('"', '').split('@').first
+        line = line.tr('"', '')
+        vendor = line.split('@').select { |e| !e.empty? }.first
+        vendor = "@#{vendor}" if line.start_with?('@')
       end
     end
 
