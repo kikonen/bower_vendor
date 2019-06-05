@@ -23,10 +23,13 @@ class BowerVendor::Yarn < BowerVendor::Copy
   end
 
   def load_vendor_versions
+    puts "RESOLVE yarn vendor versions"
     data = File.read 'yarn.lock'
     lines = data.split("\n")
 
     versions = {}
+
+    vendors = []
 
     vendor = nil
     lines.each do |line|
@@ -43,6 +46,23 @@ class BowerVendor::Yarn < BowerVendor::Copy
         line = line.tr('"', '')
         vendor = line.split('@').select { |e| !e.empty? }.first
         vendor = "@#{vendor}" if line.start_with?('@')
+        vendors << vendor
+      end
+    end
+
+    vendors.each do |vendor|
+      package_file_path = "node_modules/#{vendor}/package.json"
+      if File.exists?(package_file_path)
+        json = File.read(package_file_path)
+        data = JSON.parse(json)
+        version = data['version']
+
+        if versions[vendor] != version
+          puts "CORRECTED: #{vendor} => #{version} (was: #{versions[vendor]})"
+          versions[vendor] = version
+        end
+      else
+        puts "NOT_FOUND: #{vendor} => ??? (was: #{versions[vendor]})"
       end
     end
 
