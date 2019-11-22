@@ -79,6 +79,15 @@ class BowerVendor::Copy < BowerVendor::Base
     full_dst_file = "#{dst_dir}/#{dst_file}"
 
     msg level, "#{full_src_file} => #{full_dst_file}"
+
+    # NOTE KI create symlink to "current" version
+    vendor_parsed_path = vendor.split('/')
+    Dir.chdir(File.join(base_dst_dir, vendor_parsed_path[0, vendor_parsed_path.length - 1])) do
+      vendor_versioned_dir = vendor_parsed_path.last
+      FileUtils.rm_f(vendor_versioned_dir)
+      FileUtils.ln_sf("#{vendor_versioned_dir}-#{version}", vendor_versioned_dir)
+    end
+
     if !Dir.exist? dst_dir
       FileUtils.mkdir_p dst_dir
     end
